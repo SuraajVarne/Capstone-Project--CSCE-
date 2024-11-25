@@ -1,0 +1,31 @@
+using UnityEngine;
+
+public class CubeInteraction : MonoBehaviour
+{
+    // Start is called before the first frame update
+    void Start()
+    {
+        // Optionally, initialize things
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        // Detect mouse clicks in the game view (for testing)
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit))
+            {
+                if (hit.transform == this.transform)
+                {
+                    Debug.Log("Cube clicked!");
+                    // Optionally, change color or perform an action
+                    GetComponent<Renderer>().material.color = Color.red;
+                }
+            }
+        }
+    }
+}
