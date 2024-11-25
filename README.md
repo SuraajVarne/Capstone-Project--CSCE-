@@ -15,12 +15,6 @@ The project is structured as follows:
 - **Libraries/**: External libraries or plugins used in the project.
 - **Builds/**: Build output files for different platforms.
 
-## Features
-
-### Key Features of the Capstone Project:
-- [Feature 1: Example: VR interaction with real-time controller input]
-- [Feature 2: Example: Unity scenes for different interactions]
-- [Feature 3: Example: Integration with AI or other systems]
 
 ## Requirements
 
