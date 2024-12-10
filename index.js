@@ -1,66 +1,117 @@
+'use strict';
+
 // Import Blockly core.
 import * as Blockly from 'blockly/core';
 // Import the default blocks.
-import * as libraryBlocks from 'blockly/blocks';
-// Import a generator.
-import {javascriptGenerator} from 'blockly/javascript';
-// Import a message file.
-import * as En from 'blockly/msg/en';
+// import * as libraryBlocks from 'blockly/blocks';
+// // Import a generator.
+// import {javascriptGenerator} from 'blockly/javascript';
+// // Import a message file.
+// import * as En from 'blockly/msg/en';
 
-Blockly.setLocale(En);
-
-// Toolbox
-var toolbox = {
+const toolbox = {
     // There are two kinds of toolboxes. The simpler one is a flyout toolbox.
-    kind: 'categoryToolbox',
+    "kind": "categoryToolbox",
     // The contents is the blocks and other items that exist in your toolbox.
-    contents: [
-        { // Control Category
-            "kind": "category",
-            "name": "Control",
-            "contents": [
-                { // If Statements
-                    "kind": "block",
-                    "type": "controls_if"
-                },
-                { // Switch Statement
-                    "kind": "block",
-                    "type": "controls_switch"
-                }
-            ]
-        }, // Control
+    "contents": [
         { // Logic Category
             "kind": "category",
             "name": "Logic",
+            "categorystyle": "logic_category",
             "contents": [
+                { // If Statements
+                    "kind": "block",
+                    "type": "controls_if",
+                },
+                { // Switch Statement
+                    "kind": "block",
+                    "type": "controls_switch",
+                },
                 { //Compare Logic (=, >, <, >=, <=)
                     "kind": "block",
-                    "type": "logic_compare"
+                    "type": "logic_compare",
                 },
                 { //Logical Operation (AND, OR, XOR, NOT)
                     "kind": "block",
-                    "type": "logic_operation"
+                    "type": "logic_operation",
                 },
                 { // Boolean Logic (TRUE or FALSE)
                     "kind": "block",    
-                    "type": "logic_boolean"
-                }
+                    "type": "logic_boolean",
+                },
+                { // Null Value
+                    "kind": 'block',
+                    "type": 'logic_null',
+                },
+                { //
+                    "kind": 'block',
+                    "type": 'logic_ternary',
+                },
             ]
-        }, // Logic
+        }, 
         { // Loops Category
             "kind": "category",
             "name": "Loops", 
+            "categorystyle": "loop_category",
             "contents": [
+                {
+                    "kind": "block",
+                    "type": "controls_repeat_ext",
+                    "inputs": {
+                      "TIMES": {
+                        "shadow": {
+                          "type": "math_number",
+                          "fields": {
+                            "NUM": 10,
+                          },
+                        },
+                      },
+                    },
+                },
                 { // While Loop
                     "kind": "block",
-                    "type": "controls_whileUntil"
+                    "type": "controls_whileUntil",
                 },
                 { // For Loop
                     "kind": "block",
-                    "type": "controls_for"
-                }
+                    "type": "controls_for",
+                    "inputs": {
+                        "FROM": {
+                          "shadow": {
+                            "type": "math_number",
+                            "fields": {
+                              "NUM": 1,
+                            },
+                          },
+                        },
+                        "TO": {
+                          "shadow": {
+                            "type": "math_number",
+                            "fields": {
+                              "NUM": 10,
+                            },
+                          },
+                        },
+                        "BY": {
+                          "shadow": {
+                            "type": "math_number",
+                            "fields": {
+                              "NUM": 1,
+                            },
+                          },
+                        },
+                    },
+                },
+                {
+                    "kind": "block",
+                    "type": "controls_forEach",
+                },
+                {
+                    "kind": "block",
+                    "type": "controls_flow_statements",
+                },
             ]                    
-        }, //Loops 
+        }, 
         { // Move Category
             "kind": "category",
             "name": "Custom",
@@ -86,32 +137,108 @@ var toolbox = {
                     "type": "move_in_angle"
                 }
             ] 
-        }, // Move Category
+        }, 
         { // Math Category
             "kind": "category",
             "name": "math", 
             "content": [ 
                 {// Arithmetic Operations (Add, Subtract, Divide, Multiply)
                     "kind": "block",
-                    "type": "math_arithmetic"
-                    // Develop this block to accept the different arithmetic operations
-                }
+                    "type": "math_arithmetic",
+                    "inputs": {
+                        "A": {
+                          "shadow": {
+                            "type": "math_number",
+                            "fields": {
+                              "NUM": 1,
+                            },
+                          },
+                        },
+                        "B": {
+                          "shadow": {
+                            "type": "math_number",
+                            "fields": {
+                              "NUM": 1,
+                            },
+                          },
+                        },
+                    },
+                }, // Arithmetic Operations
+                { // Math Number
+                    "kind": "block",
+                    "type": "math_number",
+                    "fields": {
+                      "NUM": 123,
+                    },
+                }, 
+                {// Math Trigonometry
+                    "kind": 'block',
+                    "type": 'math_trig',
+                    "inputs": {
+                      "NUM": {
+                        "shadow": {
+                          "type": 'math_number',
+                          "fields": {
+                            "NUM": 45,
+                          },
+                        },
+                      },
+                    },
+                  },
+                  {
+                    "kind": "block",
+                    "type": "math_constant",
+                  },
+                  {
+                    "kind": "block",
+                    "type": "math_modulo",
+                    "inputs": {
+                      "DIVIDEND": {
+                        "shadow": {
+                          "type": "math_number",
+                          "fields": {
+                            "NUM": 64,
+                          },
+                        },
+                      },
+                      "DIVISOR": {
+                        "shadow": {
+                          "type": "math_number",
+                          "fields": {
+                            "NUM": 10,
+                          },
+                        },
+                      },
+                    },
+                  },
             ]
-        }, // Math
-        { // Functions
-            "kind": "category", 
-            "name": "functions",
-            "content": [
-                { // Function Category
-                    /* This section is to develop unique functions, 
-                    just as with any programming language */
-                }
-            ]
-
-        } // Functions
-    ]           
+        }, 
+        { // Category Separator
+            "kind": "sep",
+        },
+        { // Variable Category
+            "kind": "category",
+            "name": "Variables",
+            "categorystyle": "variable_category",
+            "custom": "VARIABLE",
+        },
+        { // Functions Category
+            "kind": "category",
+            "name": "Functions",
+            "categorystyle": "procedure_category",
+            "custom": "PROCEDURE",
+        },
+    ]// Contents           
   };
   
-  // The toolbox gets passed to the configuration struct during injection.
-  const workspace = Blockly.inject('blocklyDiv', {toolbox: toolbox});
-  
+  // Inject the toolbox into the workspace
+  const workspace = Blockly.inject(
+    document.getElementById('blocklyDiv'), {
+    toolbox: toolbox,
+    scrollbars: false,
+    horizontallayout: true,
+    toolboxPosition: "end",
+  });
+ 
+  console.log(Blockly.serialization.workspaces.save(Blockly.getMainWorkspace()));
+
