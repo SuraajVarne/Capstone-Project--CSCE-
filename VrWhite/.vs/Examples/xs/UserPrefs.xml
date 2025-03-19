@@ -1,0 +1,23 @@
+﻿<Properties StartupConfiguration="{1037E0B1-5CBB-D3DD-8F15-81F7802CD1F0}|">
+  <MonoDevelop.Ide.Workbench ActiveDocument="../Source/Script/Whiteboard.cs">
+    <Files>
+      <File FileName="../Source/Script/Whiteboard.cs" Line="22" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Examples" expanded="True">
+            <Node name="Assets" expanded="True" selected="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="1c99468e-0245-4605-8d8a-2481387e9fb9" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+</Properties>
