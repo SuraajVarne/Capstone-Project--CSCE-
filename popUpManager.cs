@@ -1,6 +1,10 @@
 using DG.Tweening;
 using UnityEngine;
 
+/* 
+    Jan Smith - 11536897 
+*/
+
 public class popUpManager : MonoBehaviour {
     
     public GameObject popUp_prefab;

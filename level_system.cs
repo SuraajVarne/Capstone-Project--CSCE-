@@ -5,15 +5,35 @@ using System.Linq;
 using System;
 using TMPro;
 
-/* 
-The UI and necessary textfield, button, and display for this code 
-    are not included on this repo; 
-    they are on a different Unity source file 
-    
-    Jan Smith
+/*
+ TO DO:
+    - Incorporate color coding into the load_level
+    - Integrate the user color sequence to be compared with predefined one
+    - Posible refactor of color coding ideology
+
+    The UI is not included in this folder, as the file is too heavy 
+    for Github. 
+
+    Jan Smith - 11536897
+
 */
+
 public class LevelManager : MonoBehaviour {
 
+    enum Colors {   // Block's Color Code 
+        RED = 5,      // Print
+        ORANGE,       // Move_forward
+        YELLOW,       // Move_backward
+        GREEN,        // turn_right
+        BLUE,         // turn_left
+        INDIGO,       // for loop
+        VIOLET,       // if - then
+        PINK,         // if - else if - then
+        BROWN,        // Number    
+        GRAY,         // True
+        BLACK         // False
+    }
+    
     // This is the block data
     [System.Serializable]
     public class Block {
@@ -44,6 +64,7 @@ public class LevelManager : MonoBehaviour {
     public int current_level;       // Index of the current level
     private LevelData[] levels;     // Levels, 5 levels 
     private LevelData predefined_level;              // Used to access the current level
+    private List<Colors> color_sequence;
     private List<Block> user_code_sequence;          // User's JSON Blocks
     
 
@@ -227,8 +248,77 @@ public class LevelManager : MonoBehaviour {
         }
         else {
             next_level = false;
-            Debug.Log($" You've passed to level# {current_level + 1}!");
+            Debug.Log($" You've passed to level #{current_level + 1}!");
             predefined_level = levels[current_level];   // Pre-loads the next level onto the current data for this round.
         }
+    }
+
+    public int get_block_color_id(int id){
+        // Based on the block's code, return id. 
+        int block_id = 5;
+        
+        // Here, get the block's color
+        // Compare the block's color, 
+        // Based on color, return id. 
+        
+        return block_id;
+    }
+
+    public void load_color_sequence () {
+        // Use current level to check predefined code
+        // Based on predefined code, go through the blocks name to make up the color sequence        
+        // This color sequence will be the predefined color sequence for the level
+        // This function will be called every time a new level needs to be loaded 
+            // PD: At load_level();
+
+        if(next_level) color_sequence = new List<Colors>();  // If next level set to true, reset the list. 
+
+        foreach (Block block in predefined_level.predefined_code) {
+            switch(block.block_name) {
+                case "print":
+                    color_sequence.Add(Colors.RED);
+                    break;
+
+                case "turn_right":
+                    color_sequence.Add(Colors.GREEN);
+                    break;
+
+                case "turn_left":
+                    color_sequence.Add(Colors.BLUE);
+                    break;
+
+                case "move_forward":
+                    color_sequence.Add(Colors.ORANGE);    
+                    break;
+
+                case "move_backward":
+                    color_sequence.Add(Colors.YELLOW);
+                    break;    
+
+                case "for_loop":
+                    color_sequence.Add(Colors.INDIGO);
+                    break;
+
+                case "if_then":
+                    color_sequence.Add(Colors.VIOLET);
+                    break;
+                
+                case "if_elif_then":
+                    color_sequence.Add(Colors.PINK);
+                    break;    
+
+                case "true":
+                    color_sequence.Add(Colors.GRAY);
+                    break;
+
+                case "false":
+                    color_sequence.Add(Colors.BLACK);
+                    break;
+            
+                default:  // Number
+                    color_sequence.Add(Colors.BROWN);
+                    break;
+            }
+        }     
     }
 }
